@@ -14,6 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #121212;
+  font-size: 18px;
 }
 
 img {

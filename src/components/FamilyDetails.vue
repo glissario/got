@@ -1,25 +1,28 @@
 <template>
-  <h2>{{ family.name }}</h2>
-  <h3>{{ family.region }}</h3>
-  <div
-    @click="forceUpdate"
-    v-show="this.validateOverlord"
-    class="got-overlord-wrapper"
-  >
-    <router-link
-      class="got-overlord"
-      :to="{ name: 'famdetails', params: { index: indexOverlord } }"
+  <div class="wrapper">
+    <h2>{{ family.name + " - from: " + family.region }}</h2>
+    <h3 class="wappon">{{ "wappon: " + family.coatOfArms }}</h3>
+    <div
+      @click="forceUpdate"
+      v-show="this.validateOverlord"
+      class="got-overlord-wrapper"
     >
-      {{ "Overlord: " + this.overlord.name }}</router-link
-    >
+      <router-link
+        class="got-overlord"
+        :to="{ name: 'famdetails', params: { index: indexOverlord } }"
+      >
+        <strong>Overload:</strong>
+        {{ this.overlord.name }}</router-link
+      >
+    </div>
+    <h3 v-show="this.validateLength">Follower:</h3>
+    <div class="followers">
+      <label class="follower" v-for="(follower, i) in follower" v-bind:key="i">
+        {{ follower }}
+      </label>
+    </div>
+    <button class="button" @click="backToOverview">BACK</button>
   </div>
-  <h3 v-show="this.validateLength">Follower:</h3>
-  <div class="followers">
-    <label class="follower" v-for="(follower, i) in follower" v-bind:key="i">
-      {{ follower }}
-    </label>
-  </div>
-  <button class="button" @click="backToOverview">BACK</button>
 </template>
 
 <script>
@@ -103,6 +106,14 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
 .got-overlord {
   text-decoration: none;
   color: #121212;
@@ -114,21 +125,45 @@ export default {
 }
 
 h2 {
+  font-size: 2rem;
+  max-width: 45rem;
   margin: 0;
+}
+
+.wappon {
+  max-width: 40rem;
+  padding: 2rem 0.5rem;
 }
 li {
   list-style: none;
 }
 .followers {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 0.5rem 0.5rem;
+}
+.follower {
+  text-align: center;
 }
 .follower:hover {
   color: brown;
 }
 .button {
   background-color: white;
-  margin: 1.25rem 0;
+  margin: 1.25rem;
   border: 1px solid black;
+}
+
+@media only screen and (max-width: 814px) {
+  h2 {
+    font-size: 1.75rem;
+  }
+  .wappon {
+    font-size: 0.9rem;
+  }
+  .follower {
+    font-size: 0.9rem;
+  }
 }
 </style>

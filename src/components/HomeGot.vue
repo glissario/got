@@ -10,8 +10,8 @@
       class="family-element"
     />
   </ol>
-  <button class="button" @click="prevPage">prev page</button>
-  <button class="button" @click="nextPage">next page</button>
+  <button class="button" @click="prevPage">PREV</button>
+  <button class="button" @click="nextPage">NEXT</button>
 </template>
 
 <script>
@@ -90,7 +90,7 @@ export default {
 
 .button {
   background-color: white;
-  margin: 1.25rem 0;
+  margin: 1.25rem 0.5rem;
   border: 1px solid black;
 }
 </style>
