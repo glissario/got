@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
     <h2>{{ family.name + " - from: " + family.region }}</h2>
-    <h3 class="wappon">{{ "wappon: " + family.coatOfArms }}</h3>
+    <h3 v-show="validateWappon" class="wappon">
+      {{ "CoatOfArms : " + family.coatOfArms }}
+    </h3>
     <div
       @click="forceUpdate"
       v-show="this.validateOverlord"
@@ -9,7 +11,7 @@
     >
       <router-link
         class="got-overlord"
-        :to="{ name: 'famdetails', params: { index: indexOverlord } }"
+        :to="{ name: 'details', params: { index: indexOverlord } }"
       >
         <strong>Overload:</strong>
         {{ this.overlord.name }}</router-link
@@ -27,15 +29,17 @@
 
 <script>
 export default {
-  name: "FamilyDetails",
+  name: "Family",
   data() {
     return {
       family: [],
       indexOverlord: Number,
       overlord: [],
       follower: [],
+      loadedFollower: [],
       validateLength: false,
       validateOverlord: false,
+      validateWappon: false,
     };
   },
   params: {},
@@ -65,6 +69,10 @@ export default {
     let jsonData = await httpElement.json();
     this.family = jsonData;
 
+    if (this.family.wappon !== "") {
+      this.validateWappon = true;
+    }
+
     if (this.family.overlord !== "") {
       this.validateOverlord = true;
       this.indexOverlord = parseInt(this.family.overlord.replace(/\D/g, ""));
@@ -83,7 +91,7 @@ export default {
       this.overlord = jsonData;
     }
     if (this.family.swornMembers !== "") {
-      this.validateLength;
+      this.validateLength = true;
       for (let i = 0; i < this.family.swornMembers.length; i++) {
         const memberApiUrl =
           "https://anapioficeandfire.com/api/characters/" +
@@ -99,7 +107,6 @@ export default {
         jsonData = await httpElement.json();
         this.follower.push(jsonData.name);
       }
-      this.validateLength = this.follower.length > 0;
     }
   },
 };
@@ -116,6 +123,7 @@ export default {
 
 .got-overlord {
   text-decoration: none;
+  padding-top: 1rem;
   color: #121212;
 }
 

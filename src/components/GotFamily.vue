@@ -1,8 +1,8 @@
 <template>
-  <li class="family-element">
+  <li>
     <router-link
       class="got-family"
-      :to="{ name: 'famdetails', params: { index } }"
+      :to="{ name: 'details', params: { index } }"
     >
       {{ name }}</router-link
     >
@@ -37,6 +37,7 @@ export default {
 .family-element {
   cursor: pointer;
 }
+
 .got-family {
   text-decoration: none;
   margin: 2rem;

@@ -23,7 +23,7 @@ img {
 }
 
 body {
-  background-color: rgb(230, 228, 228);
+  background-color: rgb(240, 240, 240);
 }
 
 main {

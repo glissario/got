@@ -70,22 +70,21 @@ export default {
 
 .family-element {
   display: block;
-  margin: 0.5rem 0rem;
+
+  background-color: blue;
 }
+
+ol > .family-element:nth-child(1n + 1) {
+  background-color: rgb(240, 240, 240);
+  padding: 0.5rem 0rem;
+}
+ol > .family-element:nth-child(2n + 2) {
+  background-color: white;
+  padding: 0.5rem 0rem;
+}
+
 .family-element:active {
   transform: scale(1.1);
-}
-.family-element:hover {
-  transform: scale(1.05);
-  transition: 1.5s;
-}
-.letter-selector {
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
-  border: 1px solid red;
 }
 
 .button {

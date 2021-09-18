@@ -6,7 +6,7 @@
 import HomeGot from "@/components/HomeGot.vue";
 
 export default {
-  name: "fam-details",
+  name: "fam-list",
   components: {
     HomeGot,
   },
