@@ -1,34 +1,7 @@
 <template>
   <h1>List of GoT-Families</h1>
-  <div class="letter-selector">
-    <div @click="findFamily">A</div>
-    <div @click="findFamily">B</div>
-    <div @click="findFamily">C</div>
-    <div @click="findFamily">D</div>
-    <div @click="findFamily">E</div>
-    <div @click="findFamily">F</div>
-    <div @click="findFamily">G</div>
-    <div @click="findFamily">H</div>
-    <div @click="findFamily">I</div>
-    <div @click="findFamily">J</div>
-    <div @click="findFamily">K</div>
-    <div @click="findFamily">L</div>
-    <div @click="findFamily">M</div>
-    <div @click="findFamily">N</div>
-    <div @click="findFamily">O</div>
-    <div @click="findFamily">P</div>
-    <div @click="findFamily">Q</div>
-    <div @click="findFamily">R</div>
-    <div @click="findFamily">S</div>
-    <div @click="findFamily">T</div>
-    <div @click="findFamily">U</div>
-    <div @click="findFamily">V</div>
-    <div @click="findFamily">W</div>
-    <div @click="findFamily">Z</div>
-    <div @click="findFamily">Y</div>
-    <div @click="findFamily">Z</div>
-  </div>
-  <table class="got-family">
+
+  <ol class="got-family">
     <got-family
       v-for="(fam, i) in gotFamilies"
       v-bind:key="i"
@@ -36,9 +9,9 @@
       :index="(this.page - 1) * 15 + i + 1"
       class="family-element"
     />
-  </table>
-  <button @click="prevPage">prev page</button>
-  <button @click="nextPage">next page</button>
+  </ol>
+  <button class="button" @click="prevPage">prev page</button>
+  <button class="button" @click="nextPage">next page</button>
 </template>
 
 <script>
@@ -92,10 +65,19 @@ export default {
 <style scoped>
 .got-family {
   margin: 0 auto;
+  padding: 0;
 }
+
 .family-element {
   display: block;
   margin: 0.5rem 0rem;
+}
+.family-element:active {
+  transform: scale(1.1);
+}
+.family-element:hover {
+  transform: scale(1.05);
+  transition: 1.5s;
 }
 .letter-selector {
   display: flex;
@@ -104,5 +86,11 @@ export default {
   max-width: 600px;
   margin: 0 auto;
   border: 1px solid red;
+}
+
+.button {
+  background-color: white;
+  margin: 1.25rem 0;
+  border: 1px solid black;
 }
 </style>

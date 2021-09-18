@@ -22,7 +22,7 @@ const routes = [
       {
         path: "/got/:index",
         component: FamilyDetails,
-        name: "details",
+        name: "famdetails",
       },
     ],
   },

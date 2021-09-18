@@ -1,12 +1,12 @@
 <template>
-  <tr class="family-element">
+  <li class="family-element">
     <router-link
       class="got-family"
-      :to="{ name: 'details', params: { index } }"
+      :to="{ name: 'famdetails', params: { index } }"
     >
       {{ name }}</router-link
     >
-  </tr>
+  </li>
 </template>
 
 <script>
