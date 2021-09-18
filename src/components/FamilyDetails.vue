@@ -90,7 +90,7 @@ export default {
 
       this.overlord = jsonData;
     }
-    if (this.family.swornMembers !== "") {
+    if (this.family.swornMembers.length > 0) {
       this.validateLength = true;
       for (let i = 0; i < this.family.swornMembers.length; i++) {
         const memberApiUrl =
