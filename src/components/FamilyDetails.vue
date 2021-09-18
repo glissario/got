@@ -1,7 +1,11 @@
 <template>
   <h2>{{ family.name }}</h2>
   <h3>{{ family.region }}</h3>
-  <div @click="forceUpdate" class="got-overlord-wrapper">
+  <div
+    @click="forceUpdate"
+    v-show="this.validateOverlord"
+    class="got-overlord-wrapper"
+  >
     <router-link
       class="got-overlord"
       :to="{ name: 'famdetails', params: { index: indexOverlord } }"
@@ -27,7 +31,8 @@ export default {
       indexOverlord: Number,
       overlord: [],
       follower: [],
-      validateLength: null,
+      validateLength: false,
+      validateOverlord: false,
     };
   },
   params: {},
@@ -56,26 +61,14 @@ export default {
     });
     let jsonData = await httpElement.json();
     this.family = jsonData;
-    this.indexOverlord = parseInt(this.family.overlord.replace(/\D/g, ""));
 
-    const OlApiUrl =
-      "https://anapioficeandfire.com/api/houses/" + this.indexOverlord;
-    httpElement = await fetch(OlApiUrl, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-    });
-    jsonData = await httpElement.json();
-    this.overlord = jsonData;
+    if (this.family.overlord !== "") {
+      this.validateOverlord = true;
+      this.indexOverlord = parseInt(this.family.overlord.replace(/\D/g, ""));
 
-    for (let i = 0; i < this.family.swornMembers.length; i++) {
-      const memberApiUrl =
-        "https://anapioficeandfire.com/api/characters/" +
-        this.family.swornMembers[i].replace(/\D/g, "");
-
-      httpElement = await fetch(memberApiUrl, {
+      const OlApiUrl =
+        "https://anapioficeandfire.com/api/houses/" + this.indexOverlord;
+      httpElement = await fetch(OlApiUrl, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -83,9 +76,28 @@ export default {
         method: "GET",
       });
       jsonData = await httpElement.json();
-      this.follower.push(jsonData.name);
+
+      this.overlord = jsonData;
     }
-    this.validateLength = this.follower.length > 0;
+    if (this.family.swornMembers !== "") {
+      this.validateLength;
+      for (let i = 0; i < this.family.swornMembers.length; i++) {
+        const memberApiUrl =
+          "https://anapioficeandfire.com/api/characters/" +
+          this.family.swornMembers[i].replace(/\D/g, "");
+
+        httpElement = await fetch(memberApiUrl, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        });
+        jsonData = await httpElement.json();
+        this.follower.push(jsonData.name);
+      }
+      this.validateLength = this.follower.length > 0;
+    }
   },
 };
 </script>
